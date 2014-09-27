@@ -90,6 +90,21 @@ function parse($input) {
             continue;
         }
 
+        if (preg_match('/^store (\d+) "(.*)"$/', $line, $matches)) {
+            $addr = (int) $matches[1];
+            foreach (str_split($matches[2]) as $char) {
+                $number = (int) ord($char);
+                yield $parameterised['push'].int_to_signed($addr);
+                yield $parameterised['push'].int_to_signed($number);
+                yield $direct['store'];
+                $addr++;
+            }
+            yield $parameterised['push'].int_to_signed($addr);
+            yield $parameterised['push'].int_to_signed(0);
+            yield $direct['store'];
+            continue;
+        }
+
         if (preg_match('/^retrieve (-?\d+)$/', $line, $matches)) {
             $addr = (int) $matches[1];
             yield $parameterised['push'].int_to_signed($addr);
