@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../src/wsm.php';
+
+use igorw\wsm as w;
+
+if ($argc <= 1) {
+    echo "Usage: bin/wsm filename.wsm\n";
+    exit(1);
+}
+
+$filename = $argv[1];
+$input = explode("\n", file_get_contents($filename));
+
+foreach (w\parse($input) as $inst) {
+    echo $inst;
+}

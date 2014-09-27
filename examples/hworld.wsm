@@ -1,0 +1,52 @@
+# data
+store 0 'H'
+store 1 'e'
+store 2 'l'
+store 3 'l'
+store 4 'o'
+store 5 ','
+store 6 ' '
+store 7 'w'
+store 8 'o'
+store 9 'r'
+store 10 'l'
+store 11 'd'
+store 12 ' '
+store 13 'o'
+store 14 'f'
+store 15 ' '
+store 16 's'
+store 17 'p'
+store 18 'a'
+store 19 'c'
+store 20 'e'
+store 21 's'
+store 22 '!'
+store 23 0
+
+# p = 0
+push 0
+
+label 3 # beginning
+
+# *p
+dup
+retrieve
+
+# if (*p)
+dup
+jumpz 23 # exit
+
+# write(*p)
+write_char
+
+# p++
+push 1
+add
+
+jump 3 # beginning
+
+label 23 # exit
+write_char 10
+write_char 13
+exit
